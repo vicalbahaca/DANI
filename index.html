@@ -154,6 +154,17 @@
       animation: auraSpin 12s linear infinite;
     }
 
+    .hero-content::after {
+      content: '';
+      position: absolute;
+      inset: 8%;
+      border-radius: 28px;
+      border: 2px dashed rgba(255, 255, 255, 0.6);
+      opacity: 0.5;
+      animation: sparkle 8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
     @keyframes heroFloat {
       0%, 100% { transform: translateY(0px); }
       50% { transform: translateY(-10px); }
@@ -162,6 +173,12 @@
     @keyframes auraSpin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
+    }
+
+    @keyframes sparkle {
+      0% { opacity: 0.35; transform: scale(0.98); }
+      50% { opacity: 0.75; transform: scale(1.02); }
+      100% { opacity: 0.35; transform: scale(0.98); }
     }
 
     .eyebrow {
@@ -258,6 +275,17 @@
       font-size: clamp(1.5rem, 2vw + 1rem, 2.6rem);
       margin: 12px 0 0;
       color: #6f3a7e;
+    }
+
+    .phrase-sticker {
+      width: clamp(68px, 12vw, 130px);
+      height: auto;
+      filter: drop-shadow(0 14px 28px rgba(75, 44, 90, 0.2));
+      animation: floaty 6s ease-in-out infinite;
+    }
+
+    .phrase-sticker.small {
+      width: clamp(54px, 10vw, 100px);
     }
 
     .phrase-icons {
@@ -360,6 +388,25 @@
       border: 3px solid rgba(255, 255, 255, 0.9);
       box-shadow: 0 30px 80px var(--shadow);
       position: relative;
+    }
+
+    .letter .corner-sticker {
+      position: absolute;
+      width: clamp(60px, 10vw, 120px);
+      opacity: 0.8;
+      filter: drop-shadow(0 10px 20px rgba(75, 44, 90, 0.2));
+    }
+
+    .letter .corner-sticker.top {
+      top: -30px;
+      right: 40px;
+      animation: floaty 7s ease-in-out infinite;
+    }
+
+    .letter .corner-sticker.bottom {
+      bottom: -30px;
+      left: 40px;
+      animation: floaty 6s ease-in-out infinite reverse;
     }
 
     .letter h2 {
@@ -565,6 +612,22 @@
       top: var(--y, 50%);
       transform: translate(-50%, -50%) rotate(var(--rot, 0deg)) scale(var(--scale, 1)) translateY(var(--parallax, 0px));
       transition: transform 0.4s ease;
+    }
+
+    .decoration.sticker {
+      width: clamp(70px, 8vw, 140px);
+      height: auto;
+      filter: drop-shadow(0 16px 30px rgba(75, 44, 90, 0.25));
+      animation: floaty 8s ease-in-out infinite;
+    }
+
+    .decoration.sticker.tiny {
+      width: clamp(50px, 6vw, 100px);
+    }
+
+    @keyframes floaty {
+      0%, 100% { transform: translate(-50%, -50%) rotate(var(--rot, 0deg)) scale(var(--scale, 1)) translateY(calc(var(--parallax, 0px) + 0px)); }
+      50% { transform: translate(-50%, -50%) rotate(calc(var(--rot, 0deg) + 2deg)) scale(calc(var(--scale, 1) * 1.02)) translateY(calc(var(--parallax, 0px) - 8px)); }
     }
 
     .flower {
@@ -790,6 +853,10 @@
       <div class="decoration lego" style="--x: 84%; --y: 20%; --rot: 6deg; --scale: 1;" data-depth="0.2"></div>
       <div class="decoration sponge" style="--x: 88%; --y: 60%; --rot: -8deg; --scale: 1;" data-depth="0.18"></div>
       <div class="decoration pixel-grass" style="--x: 10%; --y: 70%; --rot: 4deg; --scale: 1;" data-depth="0.14"></div>
+      <img class="decoration sticker" style="--x: 6%; --y: 38%; --rot: -6deg; --scale: 1;" data-depth="0.1" src="files/illustrations/2d/penguin_round.png" alt="Pingüino tierno">
+      <img class="decoration sticker tiny" style="--x: 92%; --y: 38%; --rot: 8deg; --scale: 0.9;" data-depth="0.12" src="files/illustrations/2d/rabbit_round.png" alt="Conejito pastel">
+      <img class="decoration sticker" style="--x: 8%; --y: 84%; --rot: 12deg; --scale: 0.9;" data-depth="0.16" src="files/illustrations/2d/flower_01.png" alt="Flor pastel">
+      <img class="decoration sticker tiny" style="--x: 92%; --y: 78%; --rot: -8deg; --scale: 0.8;" data-depth="0.14" src="files/illustrations/2d/flower_02.png" alt="Flor rosita">
       <div class="decoration kitty" style="--x: 76%; --y: 82%; --rot: -6deg; --scale: 0.9;" data-depth="0.16">
         <span></span><i></i>
       </div>
@@ -829,6 +896,7 @@
           <div class="icon icon-heart"></div>
           <div class="icon icon-flower"></div>
         </div>
+        <img class="phrase-sticker" src="files/illustrations/2d/rabbit_round.png" alt="Conejito enamorado">
         <h2>El destino nos ha querido juntitos</h2>
       </div>
     </section>
@@ -840,6 +908,7 @@
           <div class="icon icon-flower"></div>
           <div class="icon icon-cat"><span></span></div>
         </div>
+        <img class="phrase-sticker small" src="files/illustrations/2d/cat_idle.png" alt="Gatito dulce">
         <h2>Eres la niña de mis ojos</h2>
       </div>
     </section>
@@ -851,6 +920,7 @@
           <div class="icon icon-heart"></div>
           <div class="icon icon-flower"></div>
         </div>
+        <img class="phrase-sticker" src="files/illustrations/2d/flower_03.png" alt="Flor bonita">
         <h2>Te amo te amo te amo te amo</h2>
       </div>
     </section>
@@ -862,6 +932,7 @@
           <div class="icon icon-heart"></div>
           <div class="icon icon-cat"><span></span></div>
         </div>
+        <img class="phrase-sticker" src="files/illustrations/2d/penguin_round.png" alt="Pingüino llorón">
         <h2>Gatito llorón</h2>
       </div>
     </section>
@@ -873,12 +944,15 @@
           <div class="icon icon-flower"></div>
           <div class="icon icon-heart"></div>
         </div>
+        <img class="phrase-sticker" src="files/illustrations/2d/flower_04.png" alt="Flor suave">
         <h2>Mi mujer fuertota</h2>
       </div>
     </section>
 
     <section id="letter" class="panel letter-section">
       <div class="letter reveal">
+        <img class="corner-sticker top" src="files/illustrations/2d/flower_02.png" alt="Flor pastel">
+        <img class="corner-sticker bottom" src="files/illustrations/2d/flower_01.png" alt="Flor pastel">
         <h2>Para ti, con todo el amor pastel</h2>
         <p>
           He hecho esta tontería para ti. Ya sabes que estoy a tope con cosas de trabajo y con lo fácil que es hacer una cosa de estas no podía no hacerla. Te hace mucha ilusión san valentín, así que a mí 200% más. Lo que te hace feliz, a mí me hace más feliz aún. Te mereces todo lo bonito que te pueda pasar y yo estoy para que pase. Gracias por aguantarme, gracias por quererme y por darme tanto amor. Jamás pensé que podía sentirme tan tan querido por alguien, espero que dure toda la vida, no me imagino otra cosa. Te amo te amo te amo te amo
@@ -905,6 +979,7 @@
 
   <script type="module">
     import * as THREE from './files/three/three.module.min.js';
+    import { OBJLoader } from './files/three/OBJLoader.js';
 
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -919,6 +994,7 @@
     let haloGroup;
     let legoGroup;
     let sparklePoints;
+    let catModel;
     let threeClock;
     let threeReady = false;
 
@@ -1073,6 +1149,37 @@
 
       heroGroup = new THREE.Group();
       threeScene.add(heroGroup);
+
+      const catMaterial = new THREE.MeshStandardMaterial({
+        color: 0xffc6df,
+        roughness: 0.4,
+        metalness: 0.05,
+        emissive: new THREE.Color(0xffa8c8),
+        emissiveIntensity: 0.3
+      });
+
+      const objLoader = new OBJLoader();
+      objLoader.load(
+        './files/illustrations/3d/cat/Cat.obj',
+        (obj) => {
+          obj.traverse((child) => {
+            if (child.isMesh) {
+              child.material = catMaterial;
+              child.castShadow = false;
+              child.receiveShadow = false;
+            }
+          });
+          obj.scale.set(3.4, 3.4, 3.4);
+          obj.position.set(14, -8, 6);
+          obj.rotation.set(0, -0.6, 0.1);
+          catModel = obj;
+          heroGroup.add(obj);
+        },
+        undefined,
+        () => {
+          // Fail silently if the model can't be loaded.
+        }
+      );
 
       const heartShape = createHeartShape();
       const heartGeo = new THREE.ExtrudeGeometry(heartShape, {
@@ -1229,6 +1336,11 @@
         data.mesh.rotation.x = data.baseRot.x + Math.sin(time * 0.6 + data.offset) * 0.2;
         data.mesh.rotation.y = data.baseRot.y + time * data.spin * 60;
       });
+
+      if (catModel) {
+        catModel.position.y = -8 + Math.sin(time * 0.9) * 1.2;
+        catModel.rotation.y = -0.6 + Math.sin(time * 0.4) * 0.2;
+      }
 
       heroGroup.position.y = -latestScroll * 0.02;
       heroGroup.rotation.x = Math.sin(time * 0.2) * 0.06 + latestScroll * 0.0003;
