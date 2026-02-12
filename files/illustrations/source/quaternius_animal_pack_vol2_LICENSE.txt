@@ -1,3 +1,0 @@
-Asset: Animal Pack Vol.2 (Quaternius)
-Source: https://opengameart.org/content/animated-animales-low-poly
-License: CC0 1.0 Universal (Public Domain Dedication)
