@@ -4,6 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Para Daniela Gomez</title>
+  <script>
+    if (window.location.protocol.startsWith('http')) {
+      const path = window.location.pathname;
+      const last = path.split('/').pop() || '';
+      if (!path.endsWith('/') && !last.includes('.')) {
+        window.location.replace(`${path}/` + window.location.search + window.location.hash);
+      }
+    }
+  </script>
   <style>
     @font-face {
       font-family: 'Fredoka';
