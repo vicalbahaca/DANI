@@ -132,6 +132,52 @@
       box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
     }
 
+    .collapse-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      background: rgba(255, 255, 255, 0.8);
+      color: #2b2b2b;
+      padding: 6px 10px;
+      font-size: 0.75rem;
+      letter-spacing: 0.5px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+
+    .slide-content.collapsed {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(20px);
+    }
+
+    .float-bubble {
+      position: fixed;
+      left: 28px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: #1f1a1a;
+      color: #fff;
+      border: none;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      z-index: 20;
+      cursor: pointer;
+    }
+
+    .float-bubble.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
     .scroll-hint {
       position: fixed;
       bottom: 36px;
@@ -175,6 +221,10 @@
 
   <div id="ui-layer">
     <div class="slide-content" id="slide-0">
+      <button class="collapse-btn" id="collapse-btn" type="button" aria-expanded="true">
+        Ocultar carta
+      </button>
+      <div class="letter-content">
       <h1>Feliz san valentin Dani</h1>
       <div class="description">
         <p class="mb-6">
@@ -194,10 +244,14 @@
         </p>
         <a class="cta" href="regalito.html">Abrir regalito</a>
       </div>
+      </div>
     </div>
   </div>
 
   <div class="scroll-hint">Desliza para explorar</div>
+  <button class="float-bubble" id="float-bubble" type="button" aria-expanded="false" aria-controls="slide-0">
+    Carta
+  </button>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
@@ -345,6 +399,20 @@
       mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
       mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
     });
+
+    const slideCard = document.getElementById('slide-0');
+    const collapseBtn = document.getElementById('collapse-btn');
+    const floatBubble = document.getElementById('float-bubble');
+
+    function setCollapsed(collapsed) {
+      slideCard.classList.toggle('collapsed', collapsed);
+      floatBubble.classList.toggle('show', collapsed);
+      collapseBtn.setAttribute('aria-expanded', String(!collapsed));
+      floatBubble.setAttribute('aria-expanded', String(collapsed));
+    }
+
+    collapseBtn.addEventListener('click', () => setCollapsed(true));
+    floatBubble.addEventListener('click', () => setCollapsed(false));
 
     function animate() {
       requestAnimationFrame(animate);
