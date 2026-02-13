@@ -178,6 +178,67 @@
       pointer-events: auto;
     }
 
+    .gate {
+      position: fixed;
+      inset: 0;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
+
+    .gate.hidden {
+      display: none;
+    }
+
+    .gate-card {
+      width: min(420px, 90vw);
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.15);
+      padding: 28px;
+      text-align: center;
+    }
+
+    .gate-card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .gate-card p {
+      color: #555;
+      margin-bottom: 1rem;
+    }
+
+    .gate-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .gate-row input {
+      flex: 1;
+      padding: 10px 12px;
+      font-size: 1rem;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+    }
+
+    .gate-row button {
+      padding: 10px 16px;
+      font-weight: 600;
+      border: none;
+      background: #1f1a1a;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .gate-hint {
+      margin-top: 0.8rem;
+      color: #b55252;
+      min-height: 1.2em;
+    }
+
     .scroll-hint {
       position: fixed;
       bottom: 36px;
@@ -216,6 +277,18 @@
 </head>
 <body>
   <div class="logo">Para Dani</div>
+
+  <div class="gate" id="gate">
+    <div class="gate-card">
+      <h2>Introduce la contraseña</h2>
+      <p>Para ver la sorpresa</p>
+      <div class="gate-row">
+        <input id="gate-input" type="password" placeholder="Contraseña" />
+        <button id="gate-btn" type="button">Entrar</button>
+      </div>
+      <div class="gate-hint" id="gate-hint"></div>
+    </div>
+  </div>
 
   <div id="canvas-container"></div>
 
@@ -400,6 +473,37 @@
     window.addEventListener('mousemove', (e) => {
       mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
       mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    });
+
+    const gate = document.getElementById('gate');
+    const gateInput = document.getElementById('gate-input');
+    const gateBtn = document.getElementById('gate-btn');
+    const gateHint = document.getElementById('gate-hint');
+    let attempts = 0;
+
+    function checkPassword() {
+      const value = gateInput.value.trim().toLowerCase();
+      if (value === 'mateo') {
+        gate.classList.add('hidden');
+        return;
+      }
+
+      attempts += 1;
+      gateInput.value = '';
+      gateInput.focus();
+
+      if (attempts >= 10) {
+        gateHint.textContent = 'Pista: después de mí, ¿a quién querrá más en un futuro?';
+      } else if (attempts >= 5) {
+        gateHint.textContent = 'Pista: empieza por m.';
+      } else {
+        gateHint.textContent = 'Contraseña incorrecta.';
+      }
+    }
+
+    gateBtn.addEventListener('click', checkPassword);
+    gateInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') checkPassword();
     });
 
     const slideCard = document.getElementById('slide-0');
