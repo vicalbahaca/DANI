@@ -264,12 +264,14 @@
       'Files/FullSizeRender.JPG'
     ];
 
+    const isMobile = window.innerWidth <= 768;
+
     const CONFIG = {
       slideCount: images.length,
-      spacingX: 45,
-      pWidth: 14,
-      pHeight: 18,
-      camZ: 30,
+      spacingX: isMobile ? 30 : 45,
+      pWidth: isMobile ? 10 : 14,
+      pHeight: isMobile ? 13 : 18,
+      camZ: isMobile ? 26 : 30,
       wallAngleY: -0.25,
       snapDelay: 200,
       lerpSpeed: 0.06
